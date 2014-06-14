@@ -2,10 +2,10 @@ Zadanie 3
 Badanie algorytmów zastępowania stron. 
 
 Należy samodzielnie sformułować założenia symulacji: 
-- rozmiar pamięci wirtualnej (ilość stron) (czyli ilosc unikalnych wartosci w ciagu)
-- rozmiar pamięci fizycznej (ilość ramek). - ?
+- rozmiar pamięci wirtualnej (ilość stron) (czyli ilosc unikalnych wartosci w ciagu) OK
 - długość (powinna być znaczna - min. 1000) i sposób generowania ciągu odwołań do stron 
-(koniecznie uwzględnić zasadę lokalności odwołań)
+(koniecznie uwzględnić zasadę lokalności odwołań) OK
+- rozmiar pamięci fizycznej (ilość ramek). - ? 
 
 Działanie programu: 
 - wygenerować losowy ciąg n>1000 odwołań do stron (koniecznie uwzględnić zasadę lokalności odwołań)

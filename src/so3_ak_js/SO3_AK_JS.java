@@ -22,8 +22,12 @@ public class SO3_AK_JS {
      * @throws java.io.FileNotFoundException
      */
     public static void main(String[] args) throws FileNotFoundException {
+
         Zasob zas = new Zasob();
-        startMenu(zas.zPliku());
+        zas.generujCiagOdwolan();
+        //zas.wypiszOdwolania();
+        
+       // startMenu(zas.zPliku());
        
     }
     
