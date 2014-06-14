@@ -22,60 +22,25 @@ public class SO3_AK_JS {
      * @throws java.io.FileNotFoundException
      */
     public static void main(String[] args) throws FileNotFoundException {
-
         Zasob zas = new Zasob();
         zas.generujCiagOdwolan();
-        //zas.wypiszOdwolania();
+        Scanner scn = new Scanner(System.in);
         
-       // startMenu(zas.zPliku());
-       
+        System.out.println("Dla ilu różnych ilosci ramek chcesz przetestować algorytmy?");
+        int[] tab = new int[scn.nextInt()];
+        
+        System.out.println("Podaj kolejne wartosci ilosci ramek, potwierdzajac enterem");
+        for (int i=0; i<tab.length; i++){
+            tab[i]=scn.nextInt();
+        }
+        
+        for (int i=0; i<tab.length; i++){
+            zas.wykonajDlaIlosciRamek(tab[i]);
+        }
+        
     }
     
-    private static void startMenu(ArrayList<Odwolanie> procesy) throws FileNotFoundException{
-            System.out.println("* * *");
-            System.out.println("Wybierz naciskajac klawisz cyfry, a nastepnie potwierdź enterem:");
-            System.out.println("1 - Wyświetl listę procesów");
-            System.out.println("2 - Wczytaj nową listę procesów");
-            System.out.println("3 - Przedstaw statystyki");
-            System.out.println("4 - Zakończ");
-
-            //MENU
-            Scanner scn = new Scanner(System.in);
-
-            switch (scn.nextInt()) {
-            case 1: 
-                    int momentZgloszenia=0;
-                    for (Odwolanie p : procesy){
-                        p.wypisz();                      
-                    }
-                    System.out.println("ilosc procesow = "+procesy.size());
-                    startMenu(procesy);
-                    break;
-            case 2:
-                    Zasob zas = new Zasob();
-                    startMenu(zas.zPliku());
-                    break;
-
-            case 3:
-                    Zasob zas2 = new Zasob();   
-
-                    System.out.println("Podaj kwant czasu dla algorytmu rotacyjnego: ");
-                    //zas2.runAlgs(procesy, scn.nextInt());
-               
-                    zas2.RR(procesy, scn.nextInt());
-                    zas2.SJFW(procesy);
-                    zas2.SJF(procesy);
-                    zas2.FCFS(procesy);
-
-                    startMenu(procesy);
-                    break;
-            
-            case 4:
     
-                    break;
-            }
-
-        }
 
     
 }

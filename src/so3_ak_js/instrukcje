@@ -8,7 +8,7 @@ Należy samodzielnie sformułować założenia symulacji:
 - rozmiar pamięci fizycznej (ilość ramek). - ? 
 
 Działanie programu: 
-- wygenerować losowy ciąg n>1000 odwołań do stron (koniecznie uwzględnić zasadę lokalności odwołań)
+- wygenerować losowy ciąg n>1000 odwołań do stron (koniecznie uwzględnić zasadę lokalności odwołań) OK
 - dla wygenerowanego ciągu podać liczbę błędów strony dla różnych algorytmów zastępowania stron
 - symulacje przeprowadzić (na tym samym ciągu testowym) dla różnej liczby ramek 
 (np. kilku (3, 5, 10?)  wartości podanych przez użytkownika)
