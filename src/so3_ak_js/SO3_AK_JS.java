@@ -27,7 +27,7 @@ public class SO3_AK_JS {
        
     }
     
-    private static void startMenu(ArrayList<Proces> procesy) throws FileNotFoundException{
+    private static void startMenu(ArrayList<Odwolanie> procesy) throws FileNotFoundException{
             System.out.println("* * *");
             System.out.println("Wybierz naciskajac klawisz cyfry, a nastepnie potwierdź enterem:");
             System.out.println("1 - Wyświetl listę procesów");
@@ -41,7 +41,7 @@ public class SO3_AK_JS {
             switch (scn.nextInt()) {
             case 1: 
                     int momentZgloszenia=0;
-                    for (Proces p : procesy){
+                    for (Odwolanie p : procesy){
                         p.wypisz();                      
                     }
                     System.out.println("ilosc procesow = "+procesy.size());

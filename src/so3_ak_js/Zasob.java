@@ -19,8 +19,8 @@ import java.util.Scanner;
  */
 public class Zasob {
     Generator genr = new Generator();
-    ArrayList<Proces> procesy1 = new ArrayList<Proces>();
-    ArrayList<Proces> procesy2 = new ArrayList<Proces>();
+    ArrayList<Odwolanie> procesy1 = new ArrayList<Odwolanie>();
+    ArrayList<Odwolanie> procesy2 = new ArrayList<Odwolanie>();
     
     
     public ArrayList zPliku() throws FileNotFoundException {
@@ -31,18 +31,18 @@ public class Zasob {
         return genr.procesy;
     }
     
-    public void nadajMomentZgloszenia(ArrayList<Proces> procesy){
+    public void nadajMomentZgloszenia(ArrayList<Odwolanie> procesy){
         int momentZgloszenia = 0;
-        for (Proces p:procesy){
+        for (Odwolanie p:procesy){
             momentZgloszenia+=p.deltaZgloszenia;
             p.momentZgloszenia = momentZgloszenia;
         }
     }
     
-    public double wyliczSredniCzas(ArrayList<Proces> procesy){
+    public double wyliczSredniCzas(ArrayList<Odwolanie> procesy){
         double suma = 0;
         double srednia = 0;
-        for (Proces p : procesy){
+        for (Odwolanie p : procesy){
             suma += p.czasOczekiwania;
            // System.out.println("czasOczekiwania = "+p.czasOczekiwania);
         }
@@ -50,8 +50,8 @@ public class Zasob {
         return srednia;
     }
     
-    public void runAlgs(ArrayList<Proces> procesy, int kwantCzasu){
-        for (Proces p : procesy){
+    public void runAlgs(ArrayList<Odwolanie> procesy, int kwantCzasu){
+        for (Odwolanie p : procesy){
             procesy1.add(p);
             System.out.print("Przelano");
             p.wypisz();
@@ -63,8 +63,8 @@ public class Zasob {
         
     }
     
-    public void FCFS (ArrayList<Proces> procesy){
-        ArrayList<Proces> backupProcesy = procesy;
+    public void FCFS (ArrayList<Odwolanie> procesy){
+        ArrayList<Odwolanie> backupProcesy = procesy;
         procesy.get(0).momentWejscia=procesy.get(0).momentZgloszenia;  //ponieważ  w pętli odnosimy się do poprzedniego elementu dla każdego elementu,
         procesy.get(0).czasOczekiwania = 0;                           //musimy najpierw ustawić ręcznie wartosc dla zerowego    
         for (int i=1; i<procesy.size(); i++){                          //i zacząć pętlę dla pierwszego
@@ -74,20 +74,20 @@ public class Zasob {
         //zsumowanie wyników
         System.out.println("Dla algorytmu FIFO: "+wyliczSredniCzas(procesy)); 
         procesy = backupProcesy;
-        for (Proces pro : procesy){
+        for (Odwolanie pro : procesy){
             pro.odswiez();
         }
     }
     
-    public void SJF (ArrayList<Proces> procesy){
+    public void SJF (ArrayList<Odwolanie> procesy){
         int obecnyCzas = 0;
         boolean pozostalyNiewykonaneProcesy=true;
         
         while (pozostalyNiewykonaneProcesy){  //dopóki pozostały niewykonane procesy
             
-            ArrayList<Proces> gotoweProcesy = new ArrayList<Proces>();
+            ArrayList<Odwolanie> gotoweProcesy = new ArrayList<Odwolanie>();
 
-            for (Proces p : procesy){
+            for (Odwolanie p : procesy){
                 //jesli proces zdazyl sie zglosic ORAZ nie zostal jeszcze wykonany
                 if (p.momentZgloszenia <= obecnyCzas && p.czyWykonany == false){
                     gotoweProcesy.add(p);
@@ -102,7 +102,7 @@ public class Zasob {
                 int najkrotszyProces = MAX_VALUE; //zamienić na int_max
                 int indeksNajkrotszego = 0;
                 //wyszukiwanie
-                for (Proces proc : gotoweProcesy){
+                for (Odwolanie proc : gotoweProcesy){
                     if (proc.dlugoscFazy<najkrotszyProces){
                          najkrotszyProces = proc.dlugoscFazy;
                          indeksNajkrotszego = proc.nrPorzadkowy-1;
@@ -123,28 +123,28 @@ public class Zasob {
             }
             //sprawdz, czy pozostaly niewykonane procesy
             pozostalyNiewykonaneProcesy=false;
-            for (Proces p : procesy){
+            for (Odwolanie p : procesy){
                     if (p.czyWykonany == false){
                        pozostalyNiewykonaneProcesy = true;
                     }    
             }   
         }//koniec while
          System.out.println("Dla algorytmu SJF: "+wyliczSredniCzas(procesy)); 
-        for (Proces pro : procesy){
+        for (Odwolanie pro : procesy){
             pro.odswiez();
         }
     }//koniec SJF
      
-    public void SJFW (ArrayList<Proces> procesy){
+    public void SJFW (ArrayList<Odwolanie> procesy){
         
         int obecnyCzas = 0;
         boolean pozostalyNiewykonaneProcesy=true;
         
         while (pozostalyNiewykonaneProcesy){ //dopóki pozostały niewykonane procesy
             
-            ArrayList<Proces> gotoweProcesy = new ArrayList<Proces>();
+            ArrayList<Odwolanie> gotoweProcesy = new ArrayList<Odwolanie>();
             
-            for (Proces p : procesy){
+            for (Odwolanie p : procesy){
                 //jesli proces zdazyl sie zglosic ORAZ nie zostal jeszcze wykonany
                 if (p.momentZgloszenia <= obecnyCzas && p.czyWykonany == false){
                     gotoweProcesy.add(p);
@@ -159,7 +159,7 @@ public class Zasob {
                 int najkrotszyProces = MAX_VALUE; //zamienić na int_max
                 int indeksNajkrotszego = 0;
                 //wyszukiwanie najkrótszego
-                for (Proces proc : gotoweProcesy){
+                for (Odwolanie proc : gotoweProcesy){
                     if (proc.dlugoscFazy<najkrotszyProces){
                          najkrotszyProces = proc.dlugoscFazy;
                          indeksNajkrotszego = proc.nrPorzadkowy-1;
@@ -167,7 +167,7 @@ public class Zasob {
                 }
                 
                 //wszystkie inne gotowe czekają, więc zwiększyć czas oczekiwania
-                for (Proces proc : gotoweProcesy){
+                for (Odwolanie proc : gotoweProcesy){
                     if (proc.nrPorzadkowy != indeksNajkrotszego+1)
                     {
                         proc.czasOczekiwania+=1;
@@ -191,7 +191,7 @@ public class Zasob {
             
 
             pozostalyNiewykonaneProcesy=false;
-            for (Proces p : procesy){
+            for (Odwolanie p : procesy){
                     if (p.czyWykonany == false){
                        pozostalyNiewykonaneProcesy = true;
                     }    
@@ -200,23 +200,23 @@ public class Zasob {
             obecnyCzas++; //zawsze
         }//koniec while
         System.out.println("Dla algorytmu SJFW: "+wyliczSredniCzas(procesy)); 
-        for (Proces pro : procesy){
+        for (Odwolanie pro : procesy){
             pro.odswiez();
         }
     }//koniec SJFW/SRTF
     
-    public void RR(ArrayList<Proces> procesy, int kwantCzasu){
+    public void RR(ArrayList<Odwolanie> procesy, int kwantCzasu){
 
         int obecnyCzas = 0;
         boolean pozostalyNiewykonaneProcesy=true;
         int nrOstatnioWykonywanego = 0;
-        LinkedList<Proces> gotoweProcesy = new LinkedList<>();
+        LinkedList<Odwolanie> gotoweProcesy = new LinkedList<>();
         
         while (pozostalyNiewykonaneProcesy){ //dopóki pozostały niewykonane procesy
 
             //dodaj do gotowychProcesów wszystkie gotowe procesy
             
-            for (Proces p : procesy){
+            for (Odwolanie p : procesy){
                 //jesli proces zdazyl sie zglosic ORAZ nie zostal jeszcze wykonany ORAZ nie jest jeszcze w kolejce
                 if (p.momentZgloszenia <= obecnyCzas && p.czyWykonany == false && !gotoweProcesy.contains(p)){
                     gotoweProcesy.offer(p);
@@ -227,7 +227,7 @@ public class Zasob {
             //wykonanie procesu
             if (!gotoweProcesy.isEmpty()){
                 //pobieramy pierwszy proces z gotowych
-                Proces p = gotoweProcesy.poll();         
+                Odwolanie p = gotoweProcesy.poll();         
                 int trwanieFazy=0;
                 if(p.dlugoscFazy <= kwantCzasu){
                     //jeśli dlFazy jest krótsza niż kwant, kończymy proces i 
@@ -246,7 +246,7 @@ public class Zasob {
                 
                 
                 //nadajemy czas oczekiwania innym procesom
-                for (Proces proc : gotoweProcesy){
+                for (Odwolanie proc : gotoweProcesy){
                     if (proc.nrPorzadkowy != p.nrPorzadkowy)
                     {
                         proc.czasOczekiwania+=trwanieFazy;
@@ -265,7 +265,7 @@ public class Zasob {
             }
             
             pozostalyNiewykonaneProcesy=false;
-            for (Proces p : procesy){
+            for (Odwolanie p : procesy){
                     if (p.czyWykonany == false){
                        pozostalyNiewykonaneProcesy = true;
                     }    
@@ -273,7 +273,7 @@ public class Zasob {
             
         }//koniec while
         System.out.println("Dla algorytmu RR: "+wyliczSredniCzas(procesy)); 
-        for (Proces pro : procesy){
+        for (Odwolanie pro : procesy){
             pro.odswiez();
         }
         

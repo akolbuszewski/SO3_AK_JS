@@ -17,42 +17,22 @@ import java.util.Scanner;
  * @author Janek
  */
 public class Generator {
-    ArrayList<Proces> procesy = new ArrayList<>();
+    int iloscStron = 40; //liczba podzielna przez 8
+    int liczbaOdwolan = 1500; //podzielna przez 20
     
-    /*metoda wczytuje plik o nazwie przekazanej parametrem
-    i interpretuje kolejne linijki, 
-    wywołujac odpowiednio metody dodajProces lub generujProcesy*/
-    void scenariuszZPliku(String nazwa) throws FileNotFoundException{
-        System.out.println("wczytywanie z "+nazwa);
-        Scanner odczyt = new Scanner(new File(nazwa));
-        while(odczyt.hasNextLine()){
-            String linia = odczyt.nextLine();
-            String[] wartosci = linia.split(",");
-            switch (wartosci[0]) {
-                case "ADD":
-                    dodajProces(Integer.parseInt(wartosci[1]),Integer.parseInt(wartosci[2]));
-                    break;
-                case "GEN":
-                    generujProcesy(Integer.parseInt(wartosci[1]),Integer.parseInt(wartosci[2]),Integer.parseInt(wartosci[3]));
-                    break;
-            }
-         }
-    }//scenariuszZPliku
+    Odwolanie[] odwolania = new Odwolanie[liczbaOdwolan];
     
-    /* tworzy nowy proces i dodaje do listy*/
-    void dodajProces(int dlugoscFazy, int deltaZgloszenia){
-        procesy.add(new Proces(procesy.size()+1, dlugoscFazy, deltaZgloszenia));
-    }
     
+
     /*generuje zadana ilosc procesow i dodaje do listy */
-    void generujProcesy(int liczbaProcesow, int maxDlugoscFazy, int maxDeltaZgl) {//czy powinny byc inne parametry?
-        for (int i = 0; i<liczbaProcesow; i++){
-            //stworz jeden proces
-            Random rand = new Random(); 
-            int dlFazy = rand.nextInt(maxDlugoscFazy)+1;
-            Random rand2 = new Random(); 
-            int momZgl = rand2.nextInt(maxDeltaZgl);
-            dodajProces(dlFazy, momZgl);
+    void generujCiagOdwolan() {
+        Random rand = new Random();
+        for (int i=1; i<=liczbaOdwolan/20; i++){ //75 razy
+           int starter = rand.nextInt(iloscStron*(3/4))+1+(iloscStron/8); //wylosuj punkt startowy z przedzialu 6-35
+           for (int j=1; j<=liczbaOdwolan/75; i++){ // 20 razy
+               int delta = rand.nextInt(11)-5;
+               odwolania[j*i] = new Odwolanie(starter + delta);
+           } 
         }
      
     }
