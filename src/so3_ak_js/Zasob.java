@@ -8,8 +8,6 @@ package so3_ak_js;
 
 import java.util.Random;
 
-
-
 /**
  *
  * @author Janek
@@ -18,11 +16,10 @@ public class Zasob {
     int iloscStron = 40; //(uwaga:i tak wpisane na sztywno!)
     int liczbaOdwolan = 1500; //podzielna przez 20
     int liczbaBledow=0;
-    
+    Odwolanie[] ramki;
     Odwolanie[] odwolania = new Odwolanie[liczbaOdwolan];
+
     
-   
-    /*generuje zadana ilosc procesow i dodaje do listy */
     void generujCiagOdwolan() {
         Random rand = new Random();
         for (int i=0; i<75; i++){ //75 razy
@@ -42,14 +39,40 @@ public class Zasob {
        }
     }
     
-    
     public void wykonajDlaIlosciRamek(int n){
-        System.out.println("Błędy dla "+n+" ramek przy uzyciu algorytmu:");
-        System.out.println(" - FIFO : "+FIFO(n));
-        System.out.println(" - RAND : "+RAND(n)); 
-        System.out.println(" - OPT : "+OPT(n)); 
-        System.out.println(" - LRU : "+LRU(n)); 
-        System.out.println(" - aLRU : "+aLRU(n));   
+        ramki = new Odwolanie[n];
+        System.out.println("BĹ‚Ä™dy dla "+n+" ramek przy uzyciu algorytmu:");
+        System.out.println(" - FIFO : "+FIFO());
+        System.out.println(" - RAND : "+RAND()); 
+        System.out.println(" - OPT : "+OPT()); 
+        System.out.println(" - LRU : "+LRU()); 
+        System.out.println(" - aLRU : "+aLRU());   
+    }
+        
+    public void wypelnijPusteRamki(){
+        for (int i=0; i<ramki.length; i++){
+            ramki[i]=odwolania[i];
+        }
+    }
+     
+    public boolean czyJestWRamkach(Odwolanie o){
+        boolean jestWRamkach=false;
+        for (Odwolanie ramka : ramki) {
+            if (ramka.wartosc == o.wartosc) {
+                jestWRamkach=true;
+            }
+        }
+        return jestWRamkach;
+    }
+    
+    public int wKtorejJestRamce(Odwolanie o){
+        int ramka = -1;
+        for (int i=0; i<ramki.length; i++) {
+            if (ramki[i].wartosc == o.wartosc) {
+                ramka = i;
+            }
+        }
+        return ramka;
     }
     
     public int FIFO(int liczbaRamek){
