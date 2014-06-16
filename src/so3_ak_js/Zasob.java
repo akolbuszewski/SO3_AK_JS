@@ -75,12 +75,20 @@ public class Zasob {
         return ramka;
     }
     
-    public int FIFO(int liczbaRamek){
+    public int FIFO(){
         liczbaBledow=0;
-        
+        wypelnijPusteRamki(); //wypelnij puste ramki pierwszymi odwolaniami        
+        int indeksOstatnioUzytejRamki = ramki.length-1; //ustawiamy na ostatni
+        for (int i=ramki.length; i<liczbaOdwolan; i++){    //dla kaĹĽdego odwolania
+            if(!czyJestWRamkach(odwolania[i])){ //jeĹ›li odwolania nie ma w ramce
+                liczbaBledow++;                 //policz bĹ‚Ä…d
+                indeksOstatnioUzytejRamki++;
+                indeksOstatnioUzytejRamki=indeksOstatnioUzytejRamki % ramki.length; 
+                ramki[indeksOstatnioUzytejRamki]=odwolania[i];
+            }
+        }
         return liczbaBledow;
     }
-    
     public int RAND(int liczbaRamek){
         liczbaBledow=0;
         
