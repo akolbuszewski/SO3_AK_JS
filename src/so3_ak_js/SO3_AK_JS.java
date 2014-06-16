@@ -33,7 +33,7 @@ public class SO3_AK_JS {
         for (int i=0; i<tab.length; i++){
             tab[i]=scn.nextInt();
         }
-        
+        //pętla
         for (int i=0; i<tab.length; i++){
             zas.wykonajDlaIlosciRamek(tab[i]);
         }
