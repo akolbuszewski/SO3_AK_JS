@@ -41,7 +41,7 @@ public class Zasob {
     
     public void wykonajDlaIlosciRamek(int n){
         ramki = new Odwolanie[n];
-        System.out.println("BĹ‚Ä™dy dla "+n+" ramek przy uzyciu algorytmu:");
+        System.out.println("Bledy dla "+n+" ramek przy uzyciu algorytmu:");
         System.out.println(" - FIFO : "+FIFO());
         System.out.println(" - RAND : "+RAND()); 
         System.out.println(" - OPT : "+OPT()); 
