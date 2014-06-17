@@ -91,7 +91,15 @@ public class Zasob {
     }
     public int RAND(int liczbaRamek){
         liczbaBledow=0;
-        
+        wypelnijPusteRamki();
+        for (int i=ramki.length; i<liczbaOdwolan; i++){    //dla kaĹĽdego odwolania
+            if(!czyJestWRamkach(odwolania[i])){ //jeĹ›li odwolania nie ma w ramce
+                liczbaBledow++;                 //policz bĹ‚Ä…d
+                Random rand = new Random();
+                ramki[rand.nextInt(ramki.length)]=odwolania[i];
+                
+            }
+        }
         return liczbaBledow;
     }
     
