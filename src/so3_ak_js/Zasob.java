@@ -89,7 +89,7 @@ public class Zasob {
         }
         return liczbaBledow;
     }
-    public int RAND(int liczbaRamek){
+    public int RAND(){
         liczbaBledow=0;
         wypelnijPusteRamki();
         for (int i=ramki.length; i<liczbaOdwolan; i++){    //dla kaĹĽdego odwolania
@@ -103,7 +103,7 @@ public class Zasob {
         return liczbaBledow;
     }
     
-    public int OPT(int liczbaRamek){
+    public int OPT(){
         liczbaBledow=0;
         wypelnijPusteRamki();
         for(int i=0; i<liczbaOdwolan; i++) {
@@ -171,7 +171,7 @@ public class Zasob {
         
     
     
-   public int aLRU(int liczbaRamek){
+   public int aLRU(){
         liczbaBledow=0;
                 wypelnijPusteRamki();
         boolean znalezionoZerowa;
