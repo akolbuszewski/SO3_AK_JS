@@ -12,6 +12,8 @@ package so3_ak_js;
 public class Odwolanie {
     
     int wartosc = 0;
+    int bitOdniesienia = 0;
+
     
     public Odwolanie(int wartosc) {	
 	this.wartosc = wartosc;
