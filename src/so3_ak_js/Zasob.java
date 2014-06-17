@@ -105,6 +105,14 @@ public class Zasob {
     
     public int OPT(int liczbaRamek){
         liczbaBledow=0;
+        wypelnijPusteRamki();
+        for(int i=0; i<liczbaOdwolan; i++) {
+            if(!czyJestWRamkach(odwolania[i])) {
+                liczbaBledow++;
+                ramki[najdluzejNieBedzieUzywana(i+1)] = odwolania[i];	//w miejsce tego, ktory wystapi najpozniej (szukamy przy pomocy dodatkowej metody) wstawimy nowa strone 
+            }
+        }
+
         
         return liczbaBledow;
     }
