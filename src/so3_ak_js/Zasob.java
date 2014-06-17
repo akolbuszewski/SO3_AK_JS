@@ -116,9 +116,58 @@ public class Zasob {
         
         return liczbaBledow;
     }
+    public int najdluzejNieBedzieUzywana(int poczatek) { 
+        //System.out.println("wywolano nnu");
+        int indeksNNU = 0;                         //init indeks najdluzej nieuzywanej
+        int wartoscNNU = 1;                         // init odleglosc (wartosc nnu)
+        for (int i=0; i<ramki.length; i++){         //dla kazdej ramki
+            int indOdwolania = poczatek;            //zaczynajac od poczatku
+            int count = 0;                          // counter
+            while (indOdwolania<liczbaOdwolan-1 && ramki[i].wartosc != odwolania[indOdwolania].wartosc) { //dopĂłki nie dojdziesz do wartoĹ›ci takiej, jak w ramce
+                count++; //nabijaj licznik
+                indOdwolania++; //idz dalej w odwolaniach
+            } //a kiedy dojdziesz
+            if (count > wartoscNNU){ //jesli ta ramka jest dluzej nieuzywana niz dotychczasone nnu
+               // System.out.println("yo"+count);
+                wartoscNNU = count;
+                indeksNNU = i;
+            }
+        }
+        return indeksNNU;
+    }
+
     
-    public int LRU(int liczbaRamek){
+    public int LRU(){
         liczbaBledow=0;
+        wypelnijPusteRamki();
+        for(int i=0; i<liczbaOdwolan; i++) {
+            if(!czyJestWRamkach(odwolania[i])) {
+                liczbaBledow++;
+                ramki[najdluzejNieBylaUzywana(i)] = odwolania[i];	//w miejsce tego, ktory wystapi najpozniej (szukamy przy pomocy dodatkowej metody) wstawimy nowa strone 
+            }
+        }
+        return liczbaBledow;
+    }
+         public int najdluzejNieBylaUzywana(int poczatek) { 
+        //System.out.println("wywolano nnu");
+        int indeksNNU = 0;                         //init indeks najdluzej nieuzywanej
+        int wartoscNNU = 1;                         // init odleglosc (wartosc nnu)
+        for (int i=0; i<ramki.length; i++){         //dla kazdej ramki
+            int indOdwolania = poczatek;            //zaczynajac od poczatku
+            int count = 0;                          // counter
+            while (indOdwolania>=0 && ramki[i].wartosc != odwolania[indOdwolania].wartosc) { //dopĂłki nie dojdziesz do wartoĹ›ci takiej, jak w ramce
+                count++; //nabijaj licznik
+                indOdwolania--; //idz dalej w odwolaniach
+            } //a kiedy dojdziesz
+            if (count > wartoscNNU){ //jesli ta ramka  byla dluzej nieuzywana niz dotychczasone nnu
+               // System.out.println("yo"+count);
+                wartoscNNU = count;
+                indeksNNU = i;
+            }
+        }
+        return indeksNNU;
+    }
+}
         
         return liczbaBledow;
     }
