@@ -167,14 +167,35 @@ public class Zasob {
         }
         return indeksNNU;
     }
-}
+
         
-        return liczbaBledow;
-    }
     
     
    public int aLRU(int liczbaRamek){
         liczbaBledow=0;
+                wypelnijPusteRamki();
+        boolean znalezionoZerowa;
+        //bit odniesienia jest 0 w kazdej stronie
+        for (int i=ramki.length; i<liczbaOdwolan; i++){          //dla kaĹĽdego odwolania
+            if (czyJestWRamkach(odwolania[i])){                   //jesli biezace odwolanie jest do strony, ktora juz jest w ramce
+                ramki[wKtorejJestRamce(odwolania[i])].bitOdniesienia = 1; //nadaj tej stronie 1, zeby zaznaczyc, ze byla uzywana
+            } else if(!czyJestWRamkach(odwolania[i])){            //jeĹ›li w ramkach nie ma takiej strony
+                liczbaBledow++;       
+                znalezionoZerowa = false; 
+                for (int j=ramki.length; j<ramki.length; j++){    //przejdz przez bramki
+                    if(ramki[j].bitOdniesienia == 0){             //jesli znajdziesz z zerem
+                        znalezionoZerowa = true;                  //zaznacz to
+                         ramki[j] = odwolania[i];                 //wrzuc tam odwolanie
+                    }
+                }
+                if (znalezionoZerowa == false){
+                    Random rand = new Random();
+                   ramki[rand.nextInt(ramki.length)]=odwolania[i]; 
+                 }
+
+                
+            }
+        }
         return liczbaBledow;
     }
 
